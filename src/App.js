@@ -10,6 +10,7 @@ import { AUTH_TOKEN, EMAIL} from './common/constants';
 import Navbarr from './common/navbar.components';
 import { AppContext, useAppContext } from './common/contextLib';
 import Forgot from './Auth/Screen/forgot.components';
+import ResetPassword from './Auth/Screen/resetP.component';
 
 
 function Routes(){
@@ -91,6 +92,8 @@ function App() {
             <Route path="/sign-in" component={Login} />
             <Route path="/sign-up" component={Signup} />
             <Route path="/forgot" component={Forgot}/>
+            <Route path="/reset" component={ResetPassword}/>
+
           </Switch>
         </div>
       </div>

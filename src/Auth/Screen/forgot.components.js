@@ -1,11 +1,37 @@
+import { useMutation } from "@apollo/client";
 import React, {useState} from "react";
+import gql from "graphql-tag";
+import { useHistory } from "react-router";
+
 
 const Forgot =()=>{
+    const history = useHistory();
     const [email, setEmail] = useState("");
+    const forgotMutation = gql`
+    mutation ForgotMutation($email:String!){
+        sendPasswordResetEmail(email:$email){
+            success,
+            errors
+        }
+    }`;
+
+    const [forgot] = useMutation(
+       forgotMutation, {
+           variables:{
+               email:email
+           },
+           onCompleted:({sendPasswordResetEmail})=>{
+               if(sendPasswordResetEmail.errors == null){
+                console.log(sendPasswordResetEmail.success);
+                history.push('/reset');
+            }
+           }
+       } 
+    );
     return (
         <form  onSubmit={e => {
             e.preventDefault();
-            // login();
+            forgot();
             
           }}
           >
