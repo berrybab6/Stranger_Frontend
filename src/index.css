@@ -59,6 +59,7 @@ body, html, .App, #root, .auth-wrapper {
   color: #f8f8f8;
 }
 .login_c{
+  margin-bottom: 5px;
   color: #000 !important;
 }
 

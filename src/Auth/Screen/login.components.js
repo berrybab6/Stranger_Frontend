@@ -72,7 +72,7 @@ const Login = () => {
                 </div>
                 {/* <button type="submit" className="col-md-6 text-center btn btn-primary btn-block submit">Login</button> */}
                 <p className="forgot-password text-right">
-                    Forgot <a href="#">password?</a>
+                    Forgot <a href="/forgot">password?</a>
                 </p>
             </form>
         );

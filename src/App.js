@@ -9,6 +9,7 @@ import HomeScreen from './home/Screen/home.components';
 import { AUTH_TOKEN, EMAIL} from './common/constants';
 import Navbarr from './common/navbar.components';
 import { AppContext, useAppContext } from './common/contextLib';
+import Forgot from './Auth/Screen/forgot.components';
 
 
 function Routes(){
@@ -25,6 +26,7 @@ function Routes(){
             <Route path='/home' component={HomeScreen} />
             <Route path="/sign-in" component={Login} />
             <Route path="/sign-up" component={Signup} />
+            <Route path="/forgot" component={Forgot}/>
           </Switch>
         </div>
       </div>
@@ -88,6 +90,7 @@ function App() {
             <Route path='/home' component={HomeScreen} />
             <Route path="/sign-in" component={Login} />
             <Route path="/sign-up" component={Signup} />
+            <Route path="/forgot" component={Forgot}/>
           </Switch>
         </div>
       </div>
