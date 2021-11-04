@@ -1,51 +1,93 @@
-import React from "react";
-import { Link } from "react-router-dom";
+// // import {Navbar, Nav, NavItem, Button } from 'react-bootstrap';
+// // import Glyphicon from 'react-bootstrap/lib/Glyphicon'
 
-const Navbarr =()=>{
-    return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div className="container">
-          <Link className="navbar-brand" to={"/home"}>Hey, Stranger</Link>
-          <div className="collapse navbar-collapse lela" id="navbarTogglerDemo02">
-         
-          <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                    <Link className="nav-link" to={"/home"}>Home</Link>
-                  </li>
-                  <li className="nav-item">
-                <Link className="nav-link" to={"/sign-in"}>Login</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to={"/sign-up"}>Signup</Link>
-              </li>
-            </ul>
+// import React, {Component, useState} from 'react';
 
-                        {/* {
-                (!auth_token)? <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                    <Link className="nav-link" to={"/home"}>Home</Link>
-                  </li>
-                  <li className="nav-item">
-                <Link className="nav-link" to={"/sign-in"}>Login</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to={"/sign-up"}>Signup</Link>
-              </li>
-            </ul>
-                  :
-                  <ul className="navbar-nav ml-auto">
-               
-              <li className="nav-item" onClick={logout}>
-                <Link className="nav-link" to={"/"}>Logout</Link>
-              </li>
-            </ul>
-              } */}
+// // import Sidebar from 'react-bootstrap-sidebar';
+
+// const NaVBarStranger = ()=> {
+//     const [visible, setVisible] = useState(false);
+//     // const [updateModal] = (visible)=>{
+//     //     set
+//     // }
+
+//     // updateModal(isVisible) {
+//     // 	this.state.isVisible = isVisible;
+//     //   this.forceUpdate();
+//     // }
+
+    
+//         return (
+//           <div class="wrapper">
            
-          </div>
-        </div>
-      </nav>
-    );
-} 
+//               <nav class="sidebar">
+           
+//                   <div class="dismiss">
+//                       <i class="fas fa-arrow-left"></i>
+//                   </div>
+           
+//                   <div class="logo">
+//                       <h3><a href="index.html">Bootstrap 4 Template with Sidebar Menu</a></h3>
+//                   </div>
+           
+//                   <ul class="list-unstyled menu-elements">
+//                       <li class="active">
+//                           <a class="scroll-link" href="#top-content"><i class="fas fa-home"></i> Home</a>
+//                       </li>
+//                       <li>
+//                           <a class="scroll-link" href="#section-1"><i class="fas fa-cog"></i> What we do</a>
+//                       </li>
+//                       <li>
+//                           <a class="scroll-link" href="#section-2"><i class="fas fa-user"></i> About us</a>
+//                       </li>
+//                       <li>
+//                           <a class="scroll-link" href="#section-5"><i class="fas fa-pencil-alt"></i> Portfolio</a>
+//                       </li>
+//                       <li>
+//                           <a class="scroll-link" href="#section-6"><i class="fas fa-envelope"></i> Contact us</a>
+//                       </li>
+//                       <li>
+//                           <a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
+//                               <i class="fas fa-sync"></i>Other sections
+//                           </a>
+//                           <ul class="collapse list-unstyled" id="otherSections">
+//                               <li>
+//                                   <a class="scroll-link" href="#section-3">Our projects</a>
+//                               </li>
+//                               <li>
+//                                   <a class="scroll-link" href="#section-4">We think that...</a>
+//                               </li>
+//                           </ul>
+//                       </li>
+//                   </ul>
+           
+//                   <div class="to-top">
+//                       <a class="btn btn-primary btn-customized-3" href="#" role="button">
+//                           <i class="fas fa-arrow-up"></i> Top
+//                       </a>
+//                   </div>
+           
+//                   <div class="dark-light-buttons">
+//                       <a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
+//                       <a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
+//                   </div>
+           
+//               </nav>
+            
+//               <div class="overlay"></div>
+           
+//               <div class="content">
+//                   <a class="btn btn-primary btn-customized open-menu" href="#" role="button">
+//                       <i class="fas fa-align-left"></i> <span>Menu</span>
+//                   </a>
+           
+//               </div>
+            
+           
+//           </div>
+        
+//         );
+//     }
 
 
-export default Navbarr;
+// export default NaVBarStranger;

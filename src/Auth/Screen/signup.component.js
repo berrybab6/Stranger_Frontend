@@ -27,7 +27,6 @@ const Signup = ()=>{
       }
    }
    `;
-
    const [signup] = useMutation(registerMutation,{
        variables:{
            email:email,
@@ -35,6 +34,9 @@ const Signup = ()=>{
            password1:password,
            password2:confirmPassword
        },
+        onError:()=>{
+               setError("Connection Failure!!!");
+           },
        onCompleted:({register})=>{
         console.log("success: "+register.success);
         if(register.errors!=null){
@@ -45,14 +47,22 @@ const Signup = ()=>{
                 setConfirmPassword("");
             }
             else if(register.errors.username){
-                console.log("error: "+register.errors.username[0].message);
-                setError(register.errors.username[0].message)
+                var errors = "";
+                for(let i = 0; i<register.errors.username.length;i++){
+                    errors = errors +register.errors.username[i].message + "\n";
+                }
+                console.log("error: "+errors);
+                setError(errors)
                 setPassword("");
                 setConfirmPassword("");
             }
             else if(register.errors.password2){
-                console.log("error: "+register.errors.password2[0].message);
-                setError(register.errors.password2[0].message)
+                var errors = "";
+                for(let i = 0; i<register.errors.password2.length;i++){
+                    errors = errors +register.errors.password2[i].message + "\n";
+                }
+                console.log("error: "+errors);
+                setError(errors)
                 setPassword("");
                 setConfirmPassword("");
             }
@@ -65,12 +75,20 @@ const Signup = ()=>{
         history.push('/sign-in');
         }
        }
-   })
+   });
         return (
             <form onSubmit={e => {
                 e.preventDefault();
+                if(!username || !email || !confirmPassword || !password){
+                    setError("Fields can't be empty");
+                }else if(password !== confirmPassword){
+                    setError("Password must match!!!");
+                    setPassword("");
+                    setConfirmPassword("");
+                }
+                else{
                 signup();
-                
+                }
               }}>
                 <h3>Sign Up</h3>
             {

@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import gql from "graphql-tag";
 
 
-const ResetPassword =()=>{
+const ResetPassword =({match})=>{
     const [token, setToken] = useState("");
     const [password1, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
@@ -16,10 +16,12 @@ const ResetPassword =()=>{
         }
     }`;
 
+    const token1 = match.params.token;
+
     const [resetPassword] = useMutation(
        resetPasswordMutation, {
            variables:{
-               token:token,
+               token:token1,
                password1:password1,
                password2:password2
            },
@@ -43,7 +45,11 @@ const ResetPassword =()=>{
             }
             // setError(passwordReset.newPassword2[0].message);
            }
-        }
+        },
+        
+           onError:()=>{
+               setError("Connection Failure!!!");
+           }
        }
     );
     return (
@@ -62,7 +68,7 @@ const ResetPassword =()=>{
 
             <h3 class="login_c">Reset Password</h3>
             {
-                (error)? <div className="form-group" class="errorText">
+                (error)? <div className="form-group errorText">
                 <label value={error} >{error}</label>
                
             </div>:<div></div>

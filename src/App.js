@@ -11,6 +11,9 @@ import Navbarr from './common/navbar.components';
 import { AppContext, useAppContext } from './common/contextLib';
 import Forgot from './Auth/Screen/forgot.components';
 import ResetPassword from './Auth/Screen/resetP.component';
+import NaVBarStranger from './common/navbar.components';
+import SideNavPage from './common/sideNavber';
+import Sidebar from './common/navComp/sidebar';
 
 
 function Routes(){
@@ -55,7 +58,9 @@ function App() {
   <AppContext.Provider  value={{isAuthenticated, userHasAuthenticated}}>
      <Router>
        <div className="App">
-     <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+         <Sidebar />
+         {/* <SideNavPage /> */}
+     {/* <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div className="container">
           <Link className="navbar-brand" to={"/home"}>Hey, Stranger</Link>
           <div className="collapse navbar-collapse lela" id="navbarTogglerDemo02">
@@ -82,7 +87,7 @@ function App() {
 
           </div>
         </div>
-      </nav>
+      </nav> */}
 
       <div className="auth-wrapper">
         <div className="auth-inner">

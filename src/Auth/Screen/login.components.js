@@ -9,10 +9,13 @@ import { useAppContext } from "../../common/contextLib";
 
 const Login = () => {
     const { userHasAuthenticated} = useAppContext();
-
+    
     const history = useHistory();
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
+    const [error, setError] = useState(null);
+    
+    
     const loginMutation = gql`
     mutation LoginMutation($username:String!, $password:String!){
         tokenAuth(username: $username, password: $password) {
@@ -33,6 +36,7 @@ const Login = () => {
             password:password
         },
         onCompleted:({ tokenAuth })=>{
+            if(tokenAuth.success){
             console.log("Email: "+tokenAuth.user.email);
 
             localStorage.setItem(AUTH_TOKEN, tokenAuth.token);
@@ -40,17 +44,41 @@ const Login = () => {
             userHasAuthenticated(true);
 
             history.push('/');
-        }
+            }
+            else{
+                if(tokenAuth.errors.nonFieldErrors){
+                    var errors = "";
+                    for(let i=0;i<tokenAuth.errors.nonFieldErrors.length;i++){
+                        errors += tokenAuth.errors.nonFieldErrors[i].message + "\n"
+                    }
+                    setError(errors);
+                }
+                
+            }
+        },
+           onError:()=>{
+               setError("Connection Failure!!!");
+           }
+        
     });
         return (
             <form  onSubmit={e => {
                 e.preventDefault();
+                if(username == ""||password ==""){
+                    setError("Fields can't be empty!!!");
+                }else{
                 login();
+                }
                 
               }}
               >
                 <h3 class="login_c">Hey, Stranger</h3>
 
+              {
+                  (error)?<div className="form-group errorText">
+                  <label value={error} >{error}</label>
+                 </div>:<div></div>
+              }
                 <div className="form-group">
                     <label className="login_c">Email address</label>
                     <input type="name" value={username} onChange={(e)=>{setUsername(e.target.value)}} className="form-control" placeholder="Enter email" />
