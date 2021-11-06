@@ -14,6 +14,7 @@ import ResetPassword from './Auth/Screen/resetP.component';
 import NaVBarStranger from './common/navbar.components';
 import SideNavPage from './common/sideNavber';
 import Sidebar from './common/navComp/sidebar';
+import NaVItem from './common/navComp/navitem';
 
 
 function Routes(){
@@ -43,10 +44,10 @@ function App() {
 
   const auth_token = localStorage.getItem(AUTH_TOKEN);
 
-  // const logout = ()=>{
-  //   localStorage.removeItem(AUTH_TOKEN);
+  const logout = ()=>{
+    localStorage.removeItem(AUTH_TOKEN);
 
-  // } 
+  } 
 
   function handleLogout() {
     userHasAuthenticated(false);
@@ -58,9 +59,9 @@ function App() {
   <AppContext.Provider  value={{isAuthenticated, userHasAuthenticated}}>
      <Router>
        <div className="App">
-         <Sidebar />
+         {/* <NaVItem /> */}
          {/* <SideNavPage /> */}
-     {/* <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div className="container">
           <Link className="navbar-brand" to={"/home"}>Hey, Stranger</Link>
           <div className="collapse navbar-collapse lela" id="navbarTogglerDemo02">
@@ -87,12 +88,13 @@ function App() {
 
           </div>
         </div>
-      </nav> */}
+      </nav> 
 
       <div className="auth-wrapper">
         <div className="auth-inner">
           <Switch>
             <Route exact path='/' component={HomeScreen} />
+            {/* <Route exact path='/menu' component = {Sidebar}/> */}
             <Route path='/home' component={HomeScreen} />
             <Route path="/sign-in" component={Login} />
             <Route path="/sign-up" component={Signup} />
@@ -107,22 +109,7 @@ function App() {
     </Router>
   </AppContext.Provider>
 
-  
-  // <Router>
-  //   <div className="App">
-   //     <Navbarr />
-  //     <div className="auth-wrapper">
-  //       <div className="auth-inner">
-  //         <Switch>
-  //           <Route exact path='/' component={HomeScreen} />
-  //           <Route path='/home' component={HomeScreen} />
-  //           <Route path="/sign-in" component={Login} />
-  //           <Route path="/sign-up" component={Signup} />
-  //         </Switch>
-  //       </div>
-  //     </div>
-  //   </div></Router>
-  );
+    );
 }
 
 export default App;

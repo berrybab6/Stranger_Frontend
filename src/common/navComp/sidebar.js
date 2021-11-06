@@ -3,9 +3,12 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
+import * as BsIcons from 'react-icons/bs';
 import { SidebarData } from './sidebarData';
 import SubMenu from './subnav';
 import { IconContext } from 'react-icons/lib';
+import NaVItem from './navitem';
+// import { Link } from 'react-router-dom';
 
 const Nav = styled.div`
   background: #15171c;
@@ -20,7 +23,7 @@ const NavIcon = styled(Link)`
   font-size: 2rem;
   height: 80px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
 `;
 
@@ -42,28 +45,40 @@ const SidebarWrap = styled.div`
 `;
 
 const Sidebar = () => {
-  const [sidebar, setSidebar] = useState(false);
+  const [sidebar, setSidebar] = useState(true);
 
   const showSidebar = () => setSidebar(!sidebar);
+  const [isAuthenticated, setAuthenticated ] = useState(false);
 
+  // const [handleLogout] =()=>{
+  //   setAuthenticated(false)
+  // }
   return (
     <>
       <IconContext.Provider value={{ color: '#fff' }}>
-        <Nav>
+        {/* <Nav>
           <NavIcon to='#'>
             <FaIcons.FaBars onClick={showSidebar} />
           </NavIcon>
-        </Nav>
+          <NaVItem />
+        </Nav> */}
         <SidebarNav sidebar={sidebar}>
           <SidebarWrap>
             <NavIcon to='#'>
-              <AiIcons.AiOutlineClose onClick={showSidebar} />
+              <BsIcons.BsArrowLeftSquareFill onClick={showSidebar} />
             </NavIcon>
             {SidebarData.map((item, index) => {
               return <SubMenu item={item} key={index} />;
             })}
           </SidebarWrap>
         </SidebarNav>
+
+            {/* <Nav>
+          <NavIcon to='#'>
+            <FaIcons.FaBars onClick={showSidebar} />
+          </NavIcon>
+          <NaVItem />
+        </Nav> */}
       </IconContext.Provider>
     </>
   );
