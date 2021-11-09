@@ -1,20 +1,23 @@
-import gql from "graphql-tag";
-import React, {Component, useState} from "react";
+import React, { useState} from "react";
 // import { useState } from "react";
 // import '../../index.css';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom'; // version 5.2.0
+
+// import { Link, useHistory } from 'react-router-dom';
 import { useMutation } from "@apollo/client";
+import gql from "graphql-tag";
+
 import { AUTH_TOKEN, EMAIL } from "../../common/constants";
 import { useAppContext } from "../../common/contextLib";
 
 const Login = () => {
-    const { userHasAuthenticated} = useAppContext();
     
-    const history = useHistory();
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
     const [error, setError] = useState(null);
-    
+    const { userHasAuthenticated} = useAppContext();
+    const history = useHistory();
+
     
     const loginMutation = gql`
     mutation LoginMutation($username:String!, $password:String!){
@@ -62,6 +65,8 @@ const Login = () => {
         
     });
         return (
+                // const { userHasAuthenticated} = useAppContext();
+
             <form  onSubmit={e => {
                 e.preventDefault();
                 if(username == ""||password ==""){

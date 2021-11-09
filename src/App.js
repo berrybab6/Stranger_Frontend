@@ -17,28 +17,6 @@ import Sidebar from './common/navComp/sidebar';
 import NaVItem from './common/navComp/navitem';
 
 
-function Routes(){
-  return (
-       
-    
-    <Router>
-    <div className="App">
-       {/* <Navbarr /> */}
-      <div className="auth-wrapper">
-        <div className="auth-inner">
-          <Switch>
-            <Route exact path='/' component={HomeScreen} />
-            <Route path='/home' component={HomeScreen} />
-            <Route path="/sign-in" component={Login} />
-            <Route path="/sign-up" component={Signup} />
-            <Route path="/forgot" component={Forgot}/>
-          </Switch>
-        </div>
-      </div>
-    </div></Router>
-  );
-}
-
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
 
