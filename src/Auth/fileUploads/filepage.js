@@ -4,12 +4,14 @@ import { AUTH_TOKEN, EMAIL } from "../../common/constants";
 
 import gql from 'graphql-tag';
 import "./imageUpload.css"
+import { useHistory } from 'react-router';
 const FilePage=()=>{
     const [image, setImage] = useState("");
     const [url, setUrl] = useState("");
     const auth_token = localStorage.getItem(AUTH_TOKEN);
 
     const [email, setEmail] = useState("");
+    const history = useHistory();
     const [lastName, setLastName] = useState("");
     const [firstName, setfirstName] = useState("")
     const imageHandler =(e)=>{
@@ -35,20 +37,27 @@ const FilePage=()=>{
         }
     }`;
 
-    const [updateProfile] = useMutation(updateProfileMutation, {
+    const [updateProfile2] = useMutation(updateProfileMutation, {
         variables:{
             firstName:firstName,
             lastName:lastName
         },
         onCompleted:({updateProfile})=>{
-            setEmail(updateProfile.email)
+            if(updateProfile.email){
+            console.log("email: "+updateProfile.email);
+            setEmail(updateProfile.firstName);
+            }else{
+                history.push("/sign-in");
+            }
         }
-    })
+    });
     return(
         <div>
             <div>
                 <h1>Update Profile</h1>
             </div>
+            <div>
+            
             <div>
                 <label>First Name
                 <input type="text" value={firstName} onChange={(e)=>setfirstName(e.target.value)}/></label>
@@ -65,11 +74,19 @@ const FilePage=()=>{
             <div >
                 {(image)?<img className="imageDisp" src={image}></img>:<div></div>}
             </div>
-
+            <div>
+                <button type="submit" onClick={
+                    e=>{updateProfile2();}
+                }> Update</button>
+            </div>
             <div>
                 <h3>{email}</h3>
             </div>
+            
+            
+           
             {/* <h3>{url}</h3> */}
+        </div>
         </div>
     );
 }
