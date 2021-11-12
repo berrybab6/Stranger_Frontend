@@ -32,6 +32,9 @@ function App() {
     localStorage.removeItem(AUTH_TOKEN);
     localStorage.removeItem(EMAIL);
   }
+
+  
+
   return (
     
   <AppContext.Provider  value={{isAuthenticated, userHasAuthenticated}}>

@@ -8,10 +8,11 @@ import './index.css';
 import { AUTH_TOKEN } from './common/constants';
 import App from './App';
 import { setContext } from '@apollo/client/link/context';
+import { createUploadLink } from 'apollo-upload-client';
 
 import * as serviceWorker from './serviceWorker'
 // import reportWebVitals from './reportWebVitals';
-const httpLink = new HttpLink({ uri: "http://127.0.0.1:8000/graphql" });
+const httpLink = new createUploadLink({ uri: "http://127.0.0.1:8000/graphql" });
 
 
 const authLink = setContext((_, { headers }) => {

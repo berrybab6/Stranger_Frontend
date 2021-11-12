@@ -7,50 +7,80 @@ import "./imageUpload.css"
 import { useHistory } from 'react-router';
 const FilePage=()=>{
     const [image, setImage] = useState("");
-    const [url, setUrl] = useState("");
+    const [profile, setProfile] = useState("");
+    const [url, setUrl] = useState(null);
     const auth_token = localStorage.getItem(AUTH_TOKEN);
-
     const [email, setEmail] = useState("");
     const history = useHistory();
     const [lastName, setLastName] = useState("");
-    const [firstName, setfirstName] = useState("")
+    const [firstName, setfirstName] = useState("");
+    const [profileUrl, setProfileUrl] = useState(null);
+    
+    var imgUrl = "http://127.0.0.1:8000/media/";
+
     const imageHandler =(e)=>{
         const reader = new FileReader();
         reader.onload =()=>{
             if(reader.readyState==2){
                 setImage(reader.result);
                 setUrl(e.target.files[0])
-                // console.log(reader.result);
             }
         }
         reader.readAsDataURL(e.target.files[0]);
+
         console.log(e.target.files[0])
     }
 
-    const updateProfileMutation = gql`
-    mutation UpdateProfileMutation($firstName:String!, $lastName:String!){
-        updateProfile(firstName:$firstName, lastName:$lastName){
-            firstName,
-            email,
-            lastName
-            
-        }
-    }`;
 
+    
+    // const updateProfileMutation = gql`
+    // mutation UpdateProfileMutation($firstName:String!, $lastName:String!, $profileUrl:Upload!){
+    //     updateProfile(firstName:$firstName, lastName:$lastName, profileUrl:$profileUrl){
+    //         firstName,
+    //         email,
+    //         lastName,
+    //         profileUrl
+            
+    //     }
+    // }`;
+   
+     
+   const updateProfileMutation = gql`
+   mutation UpdateProfileMutation($profileUrl:String!){
+       updateProfile(profileUrl:$profileUrl){
+           firstName,
+           email,
+           lastName
+           
+       }
+   }`;
     const [updateProfile2] = useMutation(updateProfileMutation, {
-        variables:{
-            firstName:firstName,
-            lastName:lastName
-        },
+       
         onCompleted:({updateProfile})=>{
-            if(updateProfile.email){
-            console.log("email: "+updateProfile.email);
-            setEmail(updateProfile.firstName);
+            if(updateProfile.firstName){
+            console.log("FirstName: "+updateProfile.firstName);
+            // console.log("proefile: "+imgUrl+""+updateProfile.profileUrl);
+
+            setEmail(updateProfile.email);
+            // setProfile(imgUrl+updateProfile.profileUrl);
+            // console.log("profile"+profile);
             }else{
                 history.push("/sign-in");
             }
         }
     });
+
+    const handleImage =(e)=>{
+        const file = e.target.files[0];
+        if(!file) return
+        // setProfileUrl( );
+        updateProfile2({variables:{
+            profileUrl:file
+        }});
+        console.log("file Image: "+ file);
+    }
+  
+
     return(
         <div>
             <div>
@@ -68,24 +98,26 @@ const FilePage=()=>{
             </div>
             <div>
                 <label>
-                    <input type="file" id = "input" accept="image/*" onChange={imageHandler}></input>
+                    <input type="file" id = "input" accept="image/*" onChange={updateProfile2}></input>
                 </label>
             </div>
             <div >
-                {(image)?<img className="imageDisp" src={image}></img>:<div></div>}
+            
+            {/* <img className="imageDisp" src={profile}></img> */}
+
+                {(image)?<img className="imageDisp" src={image} ></img>:<div></div>}
             </div>
             <div>
-                <button type="submit" onClick={
-                    e=>{updateProfile2();}
-                }> Update</button>
+                <button type="submit" onClick={handleImage}
+                > Update</button>
             </div>
             <div>
-                <h3>{email}</h3>
+                <h3>{url?.name}</h3>
             </div>
             
             
            
-            {/* <h3>{url}</h3> */}
+            <h3>{email}</h3>
         </div>
         </div>
     );
