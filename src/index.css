@@ -7,7 +7,7 @@ body {
   background-image: url("images/andy-holmes-4iapyjvm714-unsplash.jpg");
   overflow-y: hidden ! important;
   overflow-x: hidden ! important;
-  background-color: #f8f8f8;
+  /* background-color: #f8f8f8; */
   width: 100%;
   /*background-size: cover;*/
   background-size: 100% auto;
@@ -26,9 +26,13 @@ h1,h2,h3,h4,h5,h6,label,span {
   /* font-family: 'Fira Sans', sans-serif; */
 }
 
-body, html, .App, #root, .auth-wrapper {
+body, html, .App, #root{
   width: 100%;
   height: 100%;
+}
+.auth-wrapper {
+  width: 100%;
+  height: 100%; 
 }
 
 .navbar-light {
@@ -38,16 +42,16 @@ body, html, .App, #root, .auth-wrapper {
 }
 
 .auth-wrapper {
-  display: flex;
-  justify-content: center;
+  display: block;
+  justify-content: space-evenly;
   flex-direction: column;
-  text-align: left;
-}
+  /* text-align: left; */
+} 
 
 .auth-inner {
-  width: 450px;
+  width: 100%;
   margin: auto;
-  background: #fff;
+  /* background:transparent; */
   /* box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2); */
   padding: 40px 55px 45px 55px;
   border-radius: 15px;

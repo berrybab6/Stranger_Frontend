@@ -11,8 +11,10 @@ import { setContext } from '@apollo/client/link/context';
 import { createUploadLink } from 'apollo-upload-client';
 
 import * as serviceWorker from './serviceWorker'
+import { SECRETQUERY } from './home/Screen/home.components';
 // import reportWebVitals from './reportWebVitals';
-const httpLink = new createUploadLink({ uri: "http://127.0.0.1:8000/graphql" });
+const httpLink = new createUploadLink({ uri: "http://127.0.0.1:8000/graphql",usePOSTForQueries: true
+});
 
 
 const authLink = setContext((_, { headers }) => {
@@ -30,6 +32,16 @@ const client = new ApolloClient({
   
   cache:new InMemoryCache()
 });
+
+// client.query({
+//   query: SECRETQUERY,
+//   context: {
+//     // example of setting the headers with context per operation
+//     headers: {
+//       special: "POST"
+//     }
+//   }
+// });
 
 ReactDOM.render(
   <BrowserRouter>
